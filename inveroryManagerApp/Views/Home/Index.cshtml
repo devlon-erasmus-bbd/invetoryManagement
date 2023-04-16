@@ -1,8 +1,18 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Operation Select";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4" style="font-size: 6vw;">@ViewData["Title"]</h1>
+</div>
+
+<div class="position-absolute top-50 start-50 translate-middle ">
+    <a asp-action="Orders" asp-controller="home" class="btn btn-primary btn-lg"
+    style="height: max-content width: max-content; font-size: 2vw;">
+        Orders
+    </a>
+    <a asp-action="Products" asp-controller="home" class="btn btn-primary btn-lg" 
+    style="height: max-content; width: max-content; font-size: 2vw;">
+        Products
+    </a>
 </div>

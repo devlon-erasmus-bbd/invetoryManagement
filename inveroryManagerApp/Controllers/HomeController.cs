@@ -18,7 +18,12 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Orders()
+    {
+        return View();
+    }
+
+    public IActionResult Products()
     {
         return View();
     }
