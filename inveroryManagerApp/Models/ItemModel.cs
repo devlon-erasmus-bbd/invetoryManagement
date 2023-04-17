@@ -5,8 +5,8 @@ public class ItemModel
     public int CompanyId { get; set; }
     public int SupplierId { get; set; }
     public int ItemCategory { get; set; }
-    public string ItemName { get; set; }
-    public string ItemDescription { get; set; }
+    public string? ItemName { get; set; }
+    public string? ItemDescription { get; set; }
     public DateTime AcquiredDate { get; set; }
     public double CostPrice { get; set; }
     public double SellPrice { get; set; }
