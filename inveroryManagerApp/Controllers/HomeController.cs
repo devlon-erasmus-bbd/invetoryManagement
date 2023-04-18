@@ -23,8 +23,16 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Products()
+    public IActionResult Items()
     {
+        return View();
+    }
+
+    public IActionResult ListItems()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        List<ItemModel> listOfItems = db.ListOfItems();
+        ViewBag.model = listOfItems;
         return View();
     }
 
