@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj": {}
+    "C:\\Users\\bbdnet2715\\Desktop\\grad-prog\\level-ups\\3_c_sharp\\repo\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj": {
+    "C:\\Users\\bbdnet2715\\Desktop\\grad-prog\\level-ups\\3_c_sharp\\repo\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
+        "projectUniqueName": "C:\\Users\\bbdnet2715\\Desktop\\grad-prog\\level-ups\\3_c_sharp\\repo\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
         "projectName": "inveroryManagerApp",
-        "projectPath": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
-        "packagesPath": "C:\\Users\\G994618\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\obj\\",
+        "projectPath": "C:\\Users\\bbdnet2715\\Desktop\\grad-prog\\level-ups\\3_c_sharp\\repo\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
+        "packagesPath": "C:\\Users\\bbdnet2715\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bbdnet2715\\Desktop\\grad-prog\\level-ups\\3_c_sharp\\repo\\invetoryManagement\\inveroryManagerApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\G994618\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\bbdnet2715\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\bbdnet2715\\Documents\\MyRaagaDocuments\\Discovery\\local_NuGet": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +40,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

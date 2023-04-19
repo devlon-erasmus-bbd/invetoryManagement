@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "List Items";
+}
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Item Category Name</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            @foreach (var item in ViewBag.model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>@item.Company.CompanyName</td>
+                        <td>@item.ItemCategory.ItemCategoryName</td>
+                        <td>@item.SellPrice</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+

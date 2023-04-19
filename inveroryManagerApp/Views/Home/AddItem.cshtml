@@ -1,0 +1,121 @@
+﻿@model inveroryManagerApp.Models.ItemModel
+@{
+    ViewData["Title"] = "Add an Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .form-group{ margin: 5px; }
+</style>
+
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Company Name</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("listCompany", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.listCompany, "", new { @class = "text-danger" })
+                <a asp-action="AddCompany" asp-controller="home" class="btn btn-default btn-sm"
+                   style="height: max-content; width: max-content; font-size: 2vw;">
+                    Add Company
+                </a>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Supplier Name</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("listSupplier", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.listSupplier, "", new { @class = "text-danger" })
+                <a asp-action="AddSupplier" asp-controller="home" class="btn btn-default btn-sm"
+                   style="height: max-content; width: max-content; font-size: 2vw;">
+                    Add Supplier
+                </a>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Item Category Name</label>
+            <div class="col-sm-10">
+                @Html.DropDownList("listItemCategory", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.listItemCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Item Name</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Item Description</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.ItemDescription, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.ItemDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Acquired Date</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.AcquiredDate, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.AcquiredDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Cost Price</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.CostPrice, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Sell Price</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.SellPrice, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.SellPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Quantity</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Expiry Date</label>
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+    </div>
+}
+
