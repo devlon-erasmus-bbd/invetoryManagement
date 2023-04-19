@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace inveroryManagerApp.Controllers;
 
-public class HomeController : Controller
+public partial class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
