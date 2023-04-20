@@ -329,8 +329,8 @@ public class DatabaseConnection
                 ItemId = (int)dataReader.GetValue(1),
                 BillId = (int)dataReader.GetValue(2),
                 Quantity = (int)dataReader.GetValue(3),
-                Discount = (int)dataReader.GetValue(4),
-                PricePaid = (int)dataReader.GetValue(5),
+                Discount = (double)dataReader.GetValue(4),
+                PricePaid = (double)dataReader.GetValue(5),
             };
 
             orderModels.Add(order);
@@ -347,6 +347,7 @@ public class DatabaseConnection
             "VALUES ('" + order.ItemId + "', '" + order.BillId + "', '" + order.Quantity + "', '" + order.Discount + "', '" + order.PricePaid +
             "');";
         SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
         CloseConnectionToDatabase(conn);
     }
 }
