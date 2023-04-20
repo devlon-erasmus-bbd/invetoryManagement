@@ -6,7 +6,7 @@ public partial class DatabaseConnection
 {
     private SqlConnection ConnectToDatabase()
     {
-        string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
+        string connectionString = @"Server=KaydenK\SQLEXPRESS;Database=invetory_manager;Trusted_Connection=True;MultipleActiveResultSets=true";
         //string connectionString = @"Data Source=.\DEVLON_LOCAL;Initial Catalog=invetory_manager;Trusted_Connection=True;Integrated Security=True";
 
         SqlConnection conn = new SqlConnection(connectionString);
