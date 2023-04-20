@@ -46,8 +46,6 @@ public partial class HomeController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         CustomerModel customerData = db.GetCustomerByCustomerId(customerid);
-        //TempData["customerId"] = customerid;
-        //TempData.Keep();
         return View(customerData);
     }
 
