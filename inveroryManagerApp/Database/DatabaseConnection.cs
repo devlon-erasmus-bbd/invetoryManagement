@@ -6,8 +6,8 @@ public partial class DatabaseConnection
 {
     private SqlConnection ConnectToDatabase()
     {
-        // string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
-        string connectionString = @"Data Source=.\DEVLON_LOCAL;Initial Catalog=invetory_manager;Trusted_Connection=True;Integrated Security=True";
+        string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
+        //string connectionString = @"Data Source=.\DEVLON_LOCAL;Initial Catalog=invetory_manager;Trusted_Connection=True;Integrated Security=True";
 
         SqlConnection conn = new SqlConnection(connectionString);
         conn.Open();
@@ -206,6 +206,29 @@ public partial class DatabaseConnection
         return customer;
     }
 
+    public StaffModel GetStaffByStaffId(int staff_id)
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT st.staff_id, st.staff_name " +
+            "FROM [invetory_manager].[dbo].[Staff] as st " +
+            "WHERE st.staff_id = " + staff_id;
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        StaffModel staff = new StaffModel();
+
+        while (dataReader.Read())
+        {
+            staff.StaffId = (int)dataReader.GetValue(0);
+            staff.StaffName = dataReader.GetValue(1).ToString();
+        }
+
+        CloseConnectionToDatabase(conn);
+        return staff;
+    }
+
     public void AddStaff(StaffModel staff)
     {
         if (staff.StaffName == null)
@@ -288,6 +311,36 @@ public partial class DatabaseConnection
             "WHERE customer_id = " + customer.CustomerId;
         SqlCommand command = new SqlCommand(sql, conn);
         command.ExecuteNonQuery();
+
+        CloseConnectionToDatabase(conn);
+    }
+    
+    public void AddTransaction(BuyItemModel buyItemModel)
+    {
+        if (buyItemModel.listStaff == 0 || buyItemModel.listCustomer == 0 || buyItemModel.SelectedItems.Count == 0)
+            return;
+
+        SqlConnection conn = ConnectToDatabase();
+
+        decimal transactionTotal = 0;
+        foreach (string i in buyItemModel.SelectedItems)
+        {
+            transactionTotal += GetItemByItemId(int.Parse(i)).SellPrice;
+        }
+
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Transaction] (fk_customer_id, fk_staff_id, transaction_total, transaction_date) " +
+            "VALUES (" + buyItemModel.listCustomer + ", " + buyItemModel.listStaff + ", " + transactionTotal.ToString().Replace(',', '.') + ", GETDATE()); " +
+            "SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedTransactionId = Convert.ToInt32(command.ExecuteScalar());
+
+        foreach (string i in buyItemModel.SelectedItems)
+        {
+            sql = "INSERT INTO [invetory_manager].[dbo].[TransactionDetails] (fk_item_id, fk_transaction_id, quantity) " +
+            "VALUES (" + i + ", " + insertedTransactionId + ", 1); SELECT SCOPE_IDENTITY()";
+            command = new SqlCommand(sql, conn);
+            command.ExecuteScalar();
+        }
 
         CloseConnectionToDatabase(conn);
     }
