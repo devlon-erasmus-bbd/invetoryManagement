@@ -36,6 +36,10 @@ public partial class ItemsController : Controller
         {
             ViewBag.model = filterClass.PerformFilter(listOfItems, filterClass.PriceLowHigh);
         }
+        else
+        {
+            ViewBag.model = listOfItems;
+        }
 
         return View();
     }
