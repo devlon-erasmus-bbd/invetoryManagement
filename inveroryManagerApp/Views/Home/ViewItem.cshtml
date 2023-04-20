@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "View an Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<h1>@ViewBag.model.ItemName</h1>
+<p>@ViewBag.model.ItemDescription</p>
+<hr/>
+
+<p><b>Company Name:</b> @ViewBag.model.Company.CompanyName</p>
+<p><b>Company Description:</b> @ViewBag.model.Company.CompanyDescription</p>
+<p><b>Supplier details:</b> @ViewBag.model.Supplier.SupplierName (@ViewBag.model.Supplier.SupplierContactNumber)</p>
+<p><b>Acquired Date:</b> @ViewBag.model.AcquiredDate.ToLongDateString()</p>
+<p><b>Cost Price:</b> @ViewBag.model.CostPrice</p>
+<p><b>Sell Price: </b> @ViewBag.model.SellPrice</p>
+<p><b>Quantity:</b> @ViewBag.model.Quantity</p>
+<p><b>Expiry Date:</b> @ViewBag.model.ExpiryDate?.ToLongDateString()</p>
