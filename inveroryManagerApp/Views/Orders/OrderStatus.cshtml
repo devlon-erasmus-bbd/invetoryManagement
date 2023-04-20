@@ -7,7 +7,7 @@
     <p1 style="font-size: 1vw;">Please Enter Order ID</p1>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("DisplayOrderStatus", "Orders", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
