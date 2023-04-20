@@ -31,9 +31,28 @@ public partial class HomeController : Controller
 
     public IActionResult Customers()
     {
+        return View();
+    }
+
+    public IActionResult ListCustomers()
+    {
         DatabaseConnection db = new DatabaseConnection();
         ViewBag.model = db.GetListOfCustomers();
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult AddCustomer()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddCustomer(CustomerModel customer)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.AddCustomer(customer);
+        return Redirect("ListCustomers");
     }
 
     public IActionResult Staffs()
