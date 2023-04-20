@@ -1,3 +1,11 @@
+CREATE DATABASE invetory_manager
+
+GO
+
+USE invetory_manager
+
+GO
+
 CREATE TABLE [Company] (
   [company_id] INT PRIMARY KEY IDENTITY(1, 1),
   [company_name] VARCHAR(20),
