@@ -6,10 +6,10 @@ namespace inveroryManagerApp.Controllers;
 
 public partial class HomeController : Controller
 {
-    public IActionResult OrderStatus()
+    /*public IActionResult OrderStatus()
     {
         return View();
-    }
+    }*/
 
     [HttpPost]
     public IActionResult CheckOrderStatus()

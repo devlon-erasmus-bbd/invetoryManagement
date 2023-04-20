@@ -48,9 +48,7 @@ public partial class HomeController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddCompany(company);
-        //return View();
-        //return RedirectToAction("AddCompany", "./AddItem");
-        return View("AddItem");
+        return Redirect("AddItem");
     }
 
     [HttpGet]
@@ -64,7 +62,21 @@ public partial class HomeController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddSupplier(supplier);
+        return Redirect("AddItem");
+    }
+
+    [HttpGet]
+    public IActionResult AddItemCategory()
+    {
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddItemCategory(ItemCategoryModel itemCategory)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.AddItemCategory(itemCategory);
+        return Redirect("AddItem");
     }
 
     [HttpGet]
@@ -106,7 +118,7 @@ public partial class HomeController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddItem(item);
-        return View();
+        return Redirect("ListItems");
     }
 
     public IActionResult OrderStatus()

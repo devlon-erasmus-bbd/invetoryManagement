@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace inveroryManagerApp.Models;
 public class ItemModel
@@ -13,6 +11,7 @@ public class ItemModel
 
     public ItemCategoryModel? ItemCategory { get; set; }
 
+    [Required(ErrorMessage = "Item Name is required. It cannot be empty.")]
     public string? ItemName { get; set; }
 
     public string? ItemDescription { get; set; }
@@ -22,9 +21,9 @@ public class ItemModel
     public DateTime AcquiredDate { get; set; }
 
 
-    [DataType(DataType.Currency)]
-    [DisplayFormat(DataFormatString = "{0:c2}", ApplyFormatInEditMode = true)]
-    public decimal CostPrice { get; set; }
+    //[DataType(DataType.Currency)]
+    //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+    public double CostPrice { get; set; }
 
 
     public decimal SellPrice { get; set; }
@@ -44,22 +43,5 @@ public class ItemModel
     [Display(Name = "ItemCategorys")]
     public int listItemCategory { get; set; }
 
-
-
-    /*
-    public IEnumerable<SelectListItem>? GetCompanyData() {
-        DatabaseConnection db = new DatabaseConnection();
-        List<CompanyModel> comModel = db.GetListOfCompany();
-        List<SelectListItem> companies = new List<SelectListItem>();
-
-        foreach (CompanyModel comModelItem in comModel)
-        {
-            companies.Add(new SelectListItem { Value = comModelItem.CompanyId.ToString(), Text = comModelItem.CompanyName });
-        }
-        return companies;
-
-    }
-    public IEnumerable<SelectListItem> SelectedComapny { get; set; }
-    */
 
 }
