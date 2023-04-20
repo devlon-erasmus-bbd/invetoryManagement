@@ -14,6 +14,14 @@ public partial class HomeController : Controller
         return View();
     }
 
+    public IActionResult AddOrder()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        List<OrderModel> listOfOrders = db.GetOrders();
+        ViewBag.model = listOfOrders;
+        return View();
+    }
+
     public IActionResult OrderStatus()
     {
         return View();
