@@ -38,9 +38,28 @@ public partial class HomeController : Controller
 
     public IActionResult Staffs()
     {
+        return View();
+    }
+
+    public IActionResult ListStaffs()
+    {
         DatabaseConnection db = new DatabaseConnection();
         ViewBag.model = db.GetListOfStaffs();
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult AddStaff()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddStaff(StaffModel staff)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.AddStaff(staff);
+        return Redirect("ListStaffs");
     }
 
     public IActionResult ListItems()
