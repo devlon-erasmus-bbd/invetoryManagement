@@ -402,3 +402,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+inveroryManagerApp/obj/inveroryManagerApp.csproj.nuget.g.props
+inveroryManagerApp/obj/inveroryManagerApp.csproj.nuget.dgspec.json
+inveroryManagerApp/obj/project.assets.json
+inveroryManagerApp/obj/project.nuget.cache
