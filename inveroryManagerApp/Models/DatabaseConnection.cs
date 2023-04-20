@@ -68,8 +68,8 @@ public class DatabaseConnection
                 ItemCategory = itemCategory,
                 ItemName = dataReader.GetValue(12).ToString(),
                 ItemDescription = dataReader.GetValue(13).ToString(),
-                //AcquiredDate = Convert.ToDateTime(dataReader.GetValue(14).ToString(), culture),
-                CostPrice = (decimal)dataReader.GetValue(15),
+                AcquiredDate = Convert.ToDateTime(dataReader.GetValue(14).ToString(), culture),
+                CostPrice = (double)dataReader.GetValue(15),
                 SellPrice = (decimal)dataReader.GetValue(16),
                 Quantity = (int)dataReader.GetValue(17),
             };
@@ -172,13 +172,106 @@ public class DatabaseConnection
         return itemCategoryModels;
     }
 
+    private CompanyModel GetCompanyByCompanyId(int company_id)
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT c.company_id, c.company_name, c.company_description, c.created_date " +
+            "FROM [invetory_manager].[dbo].[Company] as c " +
+            "WHERE c.company_id = " + company_id;
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        CompanyModel company = new CompanyModel();
+
+        while (dataReader.Read())
+        {
+            company.CompanyId = (int)dataReader.GetValue(0);
+            company.CompanyName = dataReader.GetValue(1).ToString();
+            company.CompanyDescription = dataReader.GetValue(2).ToString();
+            company.CreatedDate = Convert.ToDateTime(dataReader.GetValue(3).ToString(), culture);
+        }
+
+        CloseConnectionToDatabase(conn);
+        return company;
+    }
+
+    private SupplierModel GetSupplierBySupplierId(int supplier_id)
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT s.supplier_id, s.supplier_name, s.supplier_contact_number, s.created_date " +
+            "FROM [invetory_manager].[dbo].[Supplier] as s " +
+            "WHERE s.supplier_id = " + supplier_id;
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        SupplierModel supplier = new SupplierModel();
+
+        while (dataReader.Read())
+        {
+            supplier.SupplierId = (int)dataReader.GetValue(0);
+            supplier.SupplierName = dataReader.GetValue(1).ToString();
+            supplier.SupplierContactNumber = dataReader.GetValue(2).ToString();
+            supplier.DateAdded = Convert.ToDateTime(dataReader.GetValue(3).ToString(), culture);
+        }
+
+        CloseConnectionToDatabase(conn);
+        return supplier;
+    }
+
+    private ItemCategoryModel GetItemCategoryByItemCategoryId(int item_category)
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT ic.item_category_id, ic.item_category_name, ic.item_category_description " +
+            "FROM [invetory_manager].[dbo].[ItemCategory] as s " +
+            "WHERE s.item_category_id = " + item_category;
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        ItemCategoryModel itemCategory = new ItemCategoryModel();
+
+        while (dataReader.Read())
+        {
+            itemCategory.ItemCategoryId = (int)dataReader.GetValue(0);
+            itemCategory.ItemCategoryName = dataReader.GetValue(1).ToString();
+            itemCategory.ItemCategoryDescription = dataReader.GetValue(2).ToString();
+        }
+
+        CloseConnectionToDatabase(conn);
+        return itemCategory;
+    }
+
     public void AddItem(ItemModel item)
     {
+        if (item.ItemName == null || item.listCompany == 0 || item.listSupplier == 0 || item.listItemCategory == 0)
+            return;
 
+        SqlConnection conn = ConnectToDatabase();
+
+        var exp = (item.ExpiryDate?.ToString("'yyyy-MM-dd'") ?? "NULL");
+
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Item] " +
+            "(fk_company_id, fk_supplier_id, fk_item_category_id, item_name, item_description, " +
+            "acquired_date, cost_price, sell_price, quantity, expiry_date) " +
+            "VALUES (" + item.listCompany + ", " + item.listSupplier + ", " + item.listItemCategory + ", '" + item.ItemName + "', '" + item.ItemDescription + "', " +
+            "'" + item.AcquiredDate.ToString("yyyy-MM-dd") + "', " + item.CostPrice + ", " + item.SellPrice + ", " + item.Quantity + ", " + (item.ExpiryDate?.ToString("'yyyy-MM-dd'") ?? "NULL") + "); " +
+            "SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+
+        CloseConnectionToDatabase(conn);
     }
 
     public void AddCompany(CompanyModel company)
     {
+        if (company.CompanyName == null)
+            return;
+
         SqlConnection conn = ConnectToDatabase();
 
         String sql = "INSERT INTO [invetory_manager].[dbo].[Company] (company_name, company_description, created_date)" +
@@ -191,6 +284,9 @@ public class DatabaseConnection
 
     public void AddSupplier(SupplierModel supplier)
     {
+        if (supplier.SupplierName == null)
+            return;
+
         SqlConnection conn = ConnectToDatabase();
 
         String sql = "INSERT INTO [invetory_manager].[dbo].[Supplier] (supplier_name, supplier_contact_number, created_date)" +
@@ -203,6 +299,9 @@ public class DatabaseConnection
 
     public void AddItemCategory(ItemCategoryModel itemCategory)
     {
+        if (itemCategory.ItemCategoryName == null)
+            return;
+
         SqlConnection conn = ConnectToDatabase();
 
         String sql = "INSERT INTO [invetory_manager].[dbo].[ItemCategory] (item_category_name, item_category_description)" +
