@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8SZLaj8Mt9kzjXRpPCvklZvSqEilLCbohaWLueci5Y0B8umsJqCV8bP9Z7RYNWLYy+vhoASjF6C+imw56TPhAw==",
+  "dgSpecHash": "DP47djxU2VZ6i8bSZRO86Tw6G7u974qRn/UOZpIbcSWaPpnfjySNjGY/7gxd1mhHbqW9Ts9t98H1CY6DPt+/EQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\G994618\\Documents\\hive\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
+  "projectFilePath": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\G994618\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\G994618\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

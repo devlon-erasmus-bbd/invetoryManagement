@@ -14,12 +14,18 @@ public partial class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
     public IActionResult AddOrder()
     {
-        DatabaseConnection db = new DatabaseConnection();
-        List<OrderModel> listOfOrders = db.GetOrders();
-        ViewBag.model = listOfOrders;
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddOrder(OrderModel order)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.AddOrder(order);
+        return Redirect("ListOrders");
     }
 
     public IActionResult OrderStatus()

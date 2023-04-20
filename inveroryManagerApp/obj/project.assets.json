@@ -476,11 +476,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\G994618\\Documents\\hive\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
+      "projectUniqueName": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
       "projectName": "inveroryManagerApp",
-      "projectPath": "C:\\Users\\G994618\\Documents\\hive\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
+      "projectPath": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\inveroryManagerApp.csproj",
       "packagesPath": "C:\\Users\\G994618\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\G994618\\Documents\\hive\\invetoryManagement\\inveroryManagerApp\\obj\\",
+      "outputPath": "C:\\Users\\G994618\\Documents\\hive\\C#\\invetoryManagement\\inveroryManagerApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
