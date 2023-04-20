@@ -20,6 +20,61 @@ public class DatabaseConnection
         conn.Close();
     }
 
+    public List<CustomerModel> GetListOfCustomers()
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT cus.customer_id, cus.customer_name, cus.customer_contact_number " +
+            "FROM [invetory_manager].[dbo].[Customer] as cus";
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        List<CustomerModel> customerModels = new List<CustomerModel>();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        while (dataReader.Read())
+        {
+            CustomerModel customer = new CustomerModel()
+            {
+                CustomerId = (int)dataReader.GetValue(0),
+                CustomerName = dataReader.GetValue(1).ToString(),
+                CustomerContactNumber = dataReader.GetValue(2).ToString(),
+            };
+
+            customerModels.Add(customer);
+        }
+
+        CloseConnectionToDatabase(conn);
+
+        return customerModels;
+    }
+
+    public List<StaffModel> GetListOfStaffs()
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT s.staff_id, s.staff_name " +
+            "FROM [invetory_manager].[dbo].[Staff] as s";
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        List<StaffModel> staffModels = new List<StaffModel>();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        while (dataReader.Read())
+        {
+            StaffModel staff = new StaffModel()
+            {
+                StaffId = (int)dataReader.GetValue(0),
+                StaffName = dataReader.GetValue(1).ToString(),
+            };
+
+            staffModels.Add(staff);
+        }
+
+        CloseConnectionToDatabase(conn);
+
+        return staffModels;
+    }
+
     public List<ItemModel> GetListOfItems()
     {
         SqlConnection conn = ConnectToDatabase();
