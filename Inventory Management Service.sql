@@ -74,7 +74,7 @@ CREATE TABLE [TransactionDetails] (
 )
 GO
 
-CREATE TABLE [Order] (
+CREATE TABLE [Orders] (
   [order_id] INT PRIMARY KEY IDENTITY(1, 1),
   [fk_item_id] INT,
   [quantity] INT,
