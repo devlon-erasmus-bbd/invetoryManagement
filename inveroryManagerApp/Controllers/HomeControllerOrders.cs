@@ -28,16 +28,23 @@ public partial class HomeController : Controller
         return Redirect("ListOrders");
     }
 
+    [HttpGet]
     public IActionResult OrderStatus()
     {
         return View();
     }
 
     [HttpPost]
-    public IActionResult CheckOrderStatus()
+    public IActionResult OrderStatus(OrderModel order)
     {
-        string name = Request.Form["Name"].ToString();
-        ViewData["name"] = name;
+        TempData["model"] = order.OrderId;
+        return RedirectToAction("DisplayOrderStatus");
+    }
+
+    public IActionResult DisplayOrderStatus()
+    {
+        //Get data for ID
+        ViewBag.model = TempData["model"];
         return View();
     }
 }

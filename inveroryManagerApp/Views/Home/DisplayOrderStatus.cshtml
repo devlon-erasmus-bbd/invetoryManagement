@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Order Status";
+}
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Order Id</th>
+                </tr>
+            </thead>
+            @foreach (var item in ViewBag.model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.OrderId</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
