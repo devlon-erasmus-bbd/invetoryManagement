@@ -69,7 +69,7 @@ public class DatabaseConnection
                 ItemName = dataReader.GetValue(12).ToString(),
                 ItemDescription = dataReader.GetValue(13).ToString(),
                 AcquiredDate = Convert.ToDateTime(dataReader.GetValue(14).ToString(), culture),
-                CostPrice = (double)dataReader.GetValue(15),
+                CostPrice = (decimal)dataReader.GetValue(15),
                 SellPrice = (decimal)dataReader.GetValue(16),
                 Quantity = (int)dataReader.GetValue(17),
             };

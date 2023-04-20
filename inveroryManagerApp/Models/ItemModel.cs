@@ -23,7 +23,7 @@ public class ItemModel
 
     //[DataType(DataType.Currency)]
     //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
-    public double CostPrice { get; set; }
+    public decimal CostPrice { get; set; }
 
 
     public decimal SellPrice { get; set; }
