@@ -29,11 +29,24 @@ public partial class HomeController : Controller
         return View();
     }
 
+    public IActionResult Customers()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetListOfCustomers();
+        return View();
+    }
+
+    public IActionResult Staffs()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetListOfStaffs();
+        return View();
+    }
+
     public IActionResult ListItems()
     {
         DatabaseConnection db = new DatabaseConnection();
-        List<ItemModel> listOfItems = db.GetListOfItems();
-        ViewBag.model = listOfItems;
+        ViewBag.model = db.GetListOfItems();
         return View();
     }
 
