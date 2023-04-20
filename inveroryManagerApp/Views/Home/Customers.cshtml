@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "List Customers";
+}
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Customer Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Customer Contact Numebr</th>
+                </tr>
+            </thead>
+            @foreach (var item in ViewBag.model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.CustomerId</td>
+                        <td>@item.CustomerName</td>
+                        <td>@item.CustomerContactNumber</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
