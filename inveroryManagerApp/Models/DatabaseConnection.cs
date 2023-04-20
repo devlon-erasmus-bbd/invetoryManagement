@@ -6,7 +6,9 @@ public class DatabaseConnection
 {
     private SqlConnection ConnectToDatabase()
     {
-        string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
+        // string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
+        string connectionString = @"Data Source=.\DEVLON_LOCAL;Initial Catalog=invetory_manager;Trusted_Connection=True;Integrated Security=True";
+
         SqlConnection conn = new SqlConnection(connectionString);
         conn.Open();
 
@@ -46,6 +48,21 @@ public class DatabaseConnection
         return customerModels;
     }
 
+    public void AddStaff(StaffModel staff)
+    {
+        if (staff.StaffName == null)
+            return;
+
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Staff] (staff_name)" +
+            "VALUES ('" + staff.StaffName + "'); SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+
+        CloseConnectionToDatabase(conn);
+    }
+
     public List<StaffModel> GetListOfStaffs()
     {
         SqlConnection conn = ConnectToDatabase();
@@ -73,6 +90,20 @@ public class DatabaseConnection
         return staffModels;
     }
 
+    public void AddCustomer(CustomerModel customer)
+    {
+        if (customer.CustomerName == null)
+            return;
+
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Customer] (customer_name, customer_contact_number)" +
+            "VALUES ('" + customer.CustomerName + "', '" + customer.CustomerContactNumber + "'); SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+
+        CloseConnectionToDatabase(conn);
+    }
     public List<ItemModel> GetListOfItems()
     {
         SqlConnection conn = ConnectToDatabase();
@@ -384,8 +415,8 @@ public class DatabaseConnection
                 ItemId = (int)dataReader.GetValue(1),
                 BillId = (int)dataReader.GetValue(2),
                 Quantity = (int)dataReader.GetValue(3),
-                Discount = (double)dataReader.GetValue(4),
-                PricePaid = (double)dataReader.GetValue(5),
+                Discount = (decimal)dataReader.GetValue(4),
+                PricePaid = (decimal)dataReader.GetValue(5),
             };
 
             orderModels.Add(order);
