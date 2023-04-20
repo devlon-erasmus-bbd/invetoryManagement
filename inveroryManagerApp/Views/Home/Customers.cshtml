@@ -1,31 +1,17 @@
 ﻿@{
-    ViewData["Title"] = "List Customers";
+    ViewData["Title"] = "Customer Operations";
 }
 <div class="text-center">
     <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
 </div>
 
-<div class="wrapper">
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Customer Id</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Customer Contact Numebr</th>
-                </tr>
-            </thead>
-            @foreach (var item in ViewBag.model)
-            {
-                <tbody>
-                    <tr>
-                        <td>@item.CustomerId</td>
-                        <td>@item.CustomerName</td>
-                        <td>@item.CustomerContactNumber</td>
-                    </tr>
-                </tbody>
-            }
-        </table>
-    </div>
+<div class="position-absolute top-50 start-50 translate-middle ">
+    <a asp-action="ListCustomers" asp-controller="home" class="btn btn-primary btn-lg"
+       style="height: max-content width: max-content; font-size: 2vw;">
+        List Customers
+    </a>
+    <a asp-action="AddCustomer" asp-controller="home" class="btn btn-primary btn-lg"
+       style="height: max-content; width: max-content; font-size: 2vw;">
+        Add Customer
+    </a>
 </div>
-

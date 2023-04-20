@@ -29,6 +29,58 @@ public partial class HomeController : Controller
         return View();
     }
 
+    public IActionResult Customers()
+    {
+        return View();
+    }
+
+    public IActionResult ListCustomers()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetListOfCustomers();
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult AddCustomer()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddCustomer(CustomerModel customer)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.AddCustomer(customer);
+        return Redirect("ListCustomers");
+    }
+
+    public IActionResult Staffs()
+    {
+        return View();
+    }
+
+    public IActionResult ListStaffs()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetListOfStaffs();
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult AddStaff()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddStaff(StaffModel staff)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.AddStaff(staff);
+        return Redirect("ListStaffs");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
