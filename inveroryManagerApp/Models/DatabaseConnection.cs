@@ -366,4 +366,43 @@ public class DatabaseConnection
 
         CloseConnectionToDatabase(conn);
     }
+
+    public List<OrderModel> GetOrders()
+    {
+        SqlConnection conn = ConnectToDatabase();
+        String sql = "SELECT o.order_id, o.fk_item_id, o.fk_bill_id, o.quantity, o.discount, o.price_paid " +
+            "FROM [invetory_manager].[dbo].[Order] as o";
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        List<OrderModel> orderModels = new List<OrderModel>();
+
+        while (dataReader.Read())
+        {
+            OrderModel order = new OrderModel()
+            {
+                OrderId = (int)dataReader.GetValue(0),
+                ItemId = (int)dataReader.GetValue(1),
+                BillId = (int)dataReader.GetValue(2),
+                Quantity = (int)dataReader.GetValue(3),
+                Discount = (double)dataReader.GetValue(4),
+                PricePaid = (double)dataReader.GetValue(5),
+            };
+
+            orderModels.Add(order);
+        }
+        CloseConnectionToDatabase(conn);
+
+        return orderModels;
+    }
+
+    public void AddOrder(OrderModel order)
+    {
+        SqlConnection conn = ConnectToDatabase();
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Order] ([fk_item_id], [fk_bill_id], [quantity], [discount], [price_paid])" +
+            "VALUES ('" + order.ItemId + "', '" + order.BillId + "', '" + order.Quantity + "', '" + order.Discount + "', '" + order.PricePaid +
+            "');";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+        CloseConnectionToDatabase(conn);
+    }
 }
