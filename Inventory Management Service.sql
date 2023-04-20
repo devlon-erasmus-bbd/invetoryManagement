@@ -89,6 +89,6 @@ GO
 ALTER TABLE [Bill] ADD FOREIGN KEY ([fk_customer_id]) REFERENCES [Customer] ([customer_id])
 GO
 
-ALTER TABLE [Order] ADD FOREIGN KEY ([fk_item_id]) REFERENCES [Item] ([item_id])
+ALTER TABLE [Orders] ADD FOREIGN KEY ([fk_item_id]) REFERENCES [Item] ([item_id])
 GO
 
