@@ -30,7 +30,7 @@ CREATE TABLE [Item] (
   [item_description] VARCHAR(250),
   [acquired_date] DATE,
   [cost_price] DECIMAL(12, 2),
-  [sell_price] DECIAML(12, 2),
+  [sell_price] DECIMAL(12, 2),
   [quantity] INT,
   [expiry_date] DATE
 )
@@ -71,7 +71,7 @@ CREATE TABLE [Order] (
   [fk_item_id] INT,
   [quantity] INT,
   [discount] DECIMAL(12, 2),
-  [price_paid] DECIAML(12, 2)
+  [price_paid] DECIMAL(12, 2)
 )
 GO
 
