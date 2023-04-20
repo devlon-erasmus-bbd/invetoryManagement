@@ -45,16 +45,13 @@ public partial class OrdersController : Controller
     }
 
     [HttpPost]
-    public IActionResult OrderStatus(OrderModel order)
+    public IActionResult DisplayOrderStatus(OrderModel order)
     {
-        TempData["model"] = order.OrderId;
-        return RedirectToAction("DisplayOrderStatus");
-    }
-
-    public IActionResult DisplayOrderStatus()
-    {
-        //Get data for ID
-        ViewBag.model = TempData["model"];
+        DatabaseConnection db = new DatabaseConnection();
+        order = db.GetOrderById(order.OrderId);
+        ViewBag.model = order;
+        if (order == null)
+            return NoContent();
         return View();
     }
 }
