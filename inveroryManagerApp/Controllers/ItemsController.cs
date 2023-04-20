@@ -93,11 +93,19 @@ public partial class ItemsController : Controller
     }
 
     [HttpPost]
-    public ActionResult AddItem(ItemModel item)
+    public IActionResult AddItem(ItemModel item)
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddItem(item);
         return Redirect("ListItems");
+    }
+
+    [HttpGet]
+    public IActionResult ViewItem(int itemid)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetItemByItemId(itemid);
+        return View();
     }
 
 }
