@@ -59,7 +59,7 @@ public partial class HomeController : Controller
         return Redirect("ListCustomers");
     }
 
-    [HttpPost]
+    [HttpGet]
     public IActionResult AddCustomer()
     {
         return View();

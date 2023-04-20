@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace inveroryManagerApp.Controllers;
 
-public partial class HomeController : Controller
+public partial class ItemsController : Controller
 {
 
     public IActionResult ListItems()
