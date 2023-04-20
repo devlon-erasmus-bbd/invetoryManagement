@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "List Orders";
+}
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Item ID</th>
+                    <th scope="col">Bill ID</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Price Paid</th>
+                </tr>
+            </thead>
+            @foreach (var order in ViewBag.model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@order.ItemId</td>
+                        <td>@order.BillId</td>
+                        <td>@order.Quantity</td>
+                        <td>@order.Discount</td>
+                        <td>@order.PricePaid</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
