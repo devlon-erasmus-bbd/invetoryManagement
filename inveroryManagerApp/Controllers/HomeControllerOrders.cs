@@ -6,10 +6,18 @@ namespace inveroryManagerApp.Controllers;
 
 public partial class HomeController : Controller
 {
-    /*public IActionResult OrderStatus()
+    public IActionResult ListOrders()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        List<OrderModel> listOfOrders = db.GetOrders();
+        ViewBag.model = listOfOrders;
+        return View();
+    }
+
+    public IActionResult OrderStatus()
     {
         return View();
-    }*/
+    }
 
     [HttpPost]
     public IActionResult CheckOrderStatus()
