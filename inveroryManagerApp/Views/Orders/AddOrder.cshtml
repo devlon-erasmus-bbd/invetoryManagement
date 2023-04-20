@@ -24,6 +24,9 @@
             <div class="col-sm-10">
                 @Html.DropDownList("listItem", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.listItem, "", new { @class = "text-danger" })
+                <a asp-action="AddItem" asp-controller="Items">
+                    Add Item
+                </a>
             </div>
         </div>
 
