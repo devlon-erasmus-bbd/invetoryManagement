@@ -497,8 +497,6 @@ public class DatabaseConnection
     public List<OrderModel> GetOrders()
     {
         SqlConnection conn = ConnectToDatabase();
-        // String sql = "SELECT o.order_id, o.fk_item_id, o.quantity, o.discount, o.price_paid " +
-        //     "FROM [invetory_manager].[dbo].[Order] as o";
         String sql = "SELECT i.item_id, i.item_name, o.order_id, o.quantity, o.discount, o.price_paid " +
             "FROM [invetory_manager].[dbo].[Orders] as o " +
             "INNER JOIN [invetory_manager].[dbo].[Item] as i " +
