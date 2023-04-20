@@ -42,6 +42,24 @@ public partial class HomeController : Controller
     }
 
     [HttpGet]
+    public IActionResult EditCustomer(int customerid)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        CustomerModel customerData = db.GetCustomerByCustomerId(customerid);
+        TempData["StudentID"] = customerid;
+        TempData.Keep();
+        return View(customerData);
+    }
+
+    [HttpPost]
+    public IActionResult EditCustomer(CustomerModel customer)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        db.EditCustomer(customer);
+        return Redirect("ListCustomers");
+    }
+
+    [HttpPost]
     public IActionResult AddCustomer()
     {
         return View();
