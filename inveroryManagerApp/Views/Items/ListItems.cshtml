@@ -5,6 +5,11 @@
     <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
 </div>
 
+<form method="post" action="@Url.Action("ListItems", "Home")">
+    @Html.DropDownList("filters", new SelectList(new List<string> { "Price: High to Low", "Price: Low to High"}), "Order By")
+    <input type="submit" value="Submit" />
+</form>
+
 <div class="wrapper">
     <div class="container">
         <table class="table">

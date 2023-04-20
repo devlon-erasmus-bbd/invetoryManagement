@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using inveroryManagerApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace inveroryManagerApp.Controllers;
 
@@ -17,6 +18,15 @@ public partial class OrdersController : Controller
     [HttpGet]
     public IActionResult AddOrder()
     {
+        DatabaseConnection db = new DatabaseConnection();
+        List<ItemModel> itemList = db.GetListOfItems();
+        List<SelectListItem> itemItems = new List<SelectListItem>();
+        itemItems.Add(new SelectListItem { Text = "--Select Item--", Value = "0" });
+        foreach (ItemModel itemItem in itemList)
+        {
+            itemItems.Add(new SelectListItem { Text = itemItem.ItemName, Value = itemItem.ItemId.ToString() });
+        }
+        ViewBag.listItem = itemItems;
         return View();
     }
 
@@ -35,16 +45,13 @@ public partial class OrdersController : Controller
     }
 
     [HttpPost]
-    public IActionResult OrderStatus(OrderModel order)
+    public IActionResult DisplayOrderStatus(OrderModel order)
     {
-        TempData["model"] = order.OrderId;
-        return RedirectToAction("DisplayOrderStatus");
-    }
-
-    public IActionResult DisplayOrderStatus()
-    {
-        //Get data for ID
-        ViewBag.model = TempData["model"];
+        DatabaseConnection db = new DatabaseConnection();
+        order = db.GetOrderById(order.OrderId);
+        ViewBag.model = order;
+        if (order == null)
+            return NoContent();
         return View();
     }
 }

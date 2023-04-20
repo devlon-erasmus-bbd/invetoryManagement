@@ -10,8 +10,9 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Order ID</th>
                     <th scope="col">Item ID</th>
-                    <th scope="col">Bill ID</th>
+                    <th scope="col">Item Name</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Discount</th>
                     <th scope="col">Price Paid</th>
@@ -21,8 +22,9 @@
             {
                 <tbody>
                     <tr>
-                        <td>@order.ItemId</td>
-                        <td>@order.BillId</td>
+                        <td>@order.OrderId</td>
+                        <td>@order.Item.ItemId</td>
+                        <td>@order.Item.ItemName</td>
                         <td>@order.Quantity</td>
                         <td>@order.Discount</td>
                         <td>@order.PricePaid</td>
