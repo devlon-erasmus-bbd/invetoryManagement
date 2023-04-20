@@ -6,8 +6,8 @@ public class DatabaseConnection
 {
     private SqlConnection ConnectToDatabase()
     {
-        // string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
-        string connectionString = @"Data Source=.\DEVLON_LOCAL;Initial Catalog=invetory_manager;Trusted_Connection=True;Integrated Security=True";
+        string connectionString = @"Data Source=(local);Initial Catalog=invetory_manager;Integrated Security=true";
+        // string connectionString = @"Data Source=.\DEVLON_LOCAL;Initial Catalog=invetory_manager;Trusted_Connection=True;Integrated Security=True";
 
         SqlConnection conn = new SqlConnection(connectionString);
         conn.Open();
@@ -441,7 +441,7 @@ public class DatabaseConnection
         // String sql = "SELECT o.order_id, o.fk_item_id, o.quantity, o.discount, o.price_paid " +
         //     "FROM [invetory_manager].[dbo].[Order] as o";
         String sql = "SELECT i.item_id, i.item_name, o.order_id, o.quantity, o.discount, o.price_paid " +
-            "FROM [invetory_manager].[dbo].[Order] as o " +
+            "FROM [invetory_manager].[dbo].[Orders] as o " +
             "INNER JOIN [invetory_manager].[dbo].[Item] as i " +
             "ON o.fk_item_id = i.item_id ";
         SqlCommand command = new SqlCommand(sql, conn);
@@ -477,7 +477,7 @@ public class DatabaseConnection
             return;
 
         SqlConnection conn = ConnectToDatabase();
-        String sql = "INSERT INTO [invetory_manager].[dbo].[Order] ([fk_item_id], [quantity], [discount], [price_paid]) " +
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Orders] ([fk_item_id], [quantity], [discount], [price_paid]) " +
             "VALUES(" + order.listItem + " ," + order.Quantity + " ," + order.Discount + " ," + order.PricePaid + ")";
         SqlCommand command = new SqlCommand(sql, conn);
         int insertedID = Convert.ToInt32(command.ExecuteScalar());
