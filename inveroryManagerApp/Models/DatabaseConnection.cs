@@ -46,6 +46,21 @@ public class DatabaseConnection
         return customerModels;
     }
 
+    public void AddStaff(StaffModel staff)
+    {
+        if (staff.StaffName == null)
+            return;
+
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Staff] (staff_name)" +
+            "VALUES ('" + staff.StaffName + "'); SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+
+        CloseConnectionToDatabase(conn);
+    }
+
     public List<StaffModel> GetListOfStaffs()
     {
         SqlConnection conn = ConnectToDatabase();
