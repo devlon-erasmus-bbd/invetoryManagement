@@ -104,6 +104,20 @@ public class DatabaseConnection
 
         CloseConnectionToDatabase(conn);
     }
+    
+    public void EditCustomer(CustomerModel customer)
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "UPDATE [invetory_manager].[dbo].[Customer] SET customer_name = '" + customer.CustomerName + "', customer_contact_number = '" + customer.CustomerContactNumber+ "' " +
+            "WHERE customer_id = " + customer.CustomerId;
+        SqlCommand command = new SqlCommand(sql, conn);
+        command.ExecuteNonQuery();
+
+        CloseConnectionToDatabase(conn);
+
+    }
+
     public List<ItemModel> GetListOfItems()
     {
         SqlConnection conn = ConnectToDatabase();
@@ -308,13 +322,13 @@ public class DatabaseConnection
         return supplier;
     }
 
-    private ItemCategoryModel GetItemCategoryByItemCategoryId(int item_category)
+    private ItemCategoryModel GetItemCategoryByItemCategoryId(int item_category_id)
     {
         SqlConnection conn = ConnectToDatabase();
 
         String sql = "SELECT ic.item_category_id, ic.item_category_name, ic.item_category_description " +
             "FROM [invetory_manager].[dbo].[ItemCategory] as s " +
-            "WHERE s.item_category_id = " + item_category;
+            "WHERE s.item_category_id = " + item_category_id;
         SqlCommand command = new SqlCommand(sql, conn);
         SqlDataReader dataReader = command.ExecuteReader();
         CultureInfo culture = new CultureInfo("en-US");
@@ -332,6 +346,29 @@ public class DatabaseConnection
         return itemCategory;
     }
 
+    public CustomerModel GetCustomerByCustomerId(int customer_id)
+    {
+        SqlConnection conn = ConnectToDatabase();
+
+        String sql = "SELECT cus.customer_id, cus.customer_name, cus.customer_contact_number " +
+            "FROM [invetory_manager].[dbo].[Customer] as cus " +
+            "WHERE cus.customer_id = " + customer_id;
+        SqlCommand command = new SqlCommand(sql, conn);
+        SqlDataReader dataReader = command.ExecuteReader();
+        CultureInfo culture = new CultureInfo("en-US");
+
+        CustomerModel customer = new CustomerModel();
+
+        while (dataReader.Read())
+        {
+            customer.CustomerId = (int)dataReader.GetValue(0);
+            customer.CustomerName = dataReader.GetValue(1).ToString();
+            customer.CustomerContactNumber = dataReader.GetValue(2).ToString();
+        }
+
+        CloseConnectionToDatabase(conn);
+        return customer;
+    }
     public void AddItem(ItemModel item)
     {
         if (item.ItemName == null || item.listCompany == 0 || item.listSupplier == 0 || item.listItemCategory == 0)
