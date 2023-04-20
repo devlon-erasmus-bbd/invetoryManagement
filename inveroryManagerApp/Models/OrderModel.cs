@@ -5,6 +5,6 @@ public class OrderModel
     public int ItemId { get; set; }
     public int BillId { get; set; }
     public int Quantity { get; set; }
-    public double Discount { get; set; }
-    public double PricePaid { get; set; }
+    public decimal Discount { get; set; }
+    public decimal PricePaid { get; set; }
 }

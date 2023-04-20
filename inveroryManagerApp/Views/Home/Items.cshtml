@@ -1,25 +1,25 @@
 @{
-    ViewData["Title"] = "Products Operations";
+    ViewData["Title"] = "Items Operations";
 }
 <div class="text-center">
     <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
 </div>
 
 <div class="position-absolute top-50 start-50 translate-middle ">
-    <a asp-action="ListItems" asp-controller="home" class="btn btn-primary btn-lg"
+    <a asp-action="ListItems" asp-controller="Items" class="btn btn-primary btn-lg"
     style="height: max-content width: max-content; font-size: 2vw;">
         List Items
     </a>
-    <a asp-action="AddItem" asp-controller="home" class="btn btn-primary btn-lg" 
+    <a asp-action="AddItem" asp-controller="Items" class="btn btn-primary btn-lg" 
     style="height: max-content; width: max-content; font-size: 2vw;">
         Add Item
     </a>
-    <a asp-action="Index" asp-controller="home" class="btn btn-primary btn-lg" 
+    <a asp-action="Index" asp-controller="Items" class="btn btn-primary btn-lg" 
     style="height: max-content; width: max-content; font-size: 2vw;">
         Recall Item
     </a>
-    <a asp-action="Index" asp-controller="home" class="btn btn-primary btn-lg" 
+    @* <a asp-action="Index" asp-controller="home" class="btn btn-primary btn-lg" 
     style="height: max-content; width: max-content; font-size: 2vw;">
         Order Recieved
-    </a>
+    </a> *@
 </div>
