@@ -10,17 +10,24 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Order Id</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Item ID</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Price Paid</th>
                 </tr>
             </thead>
-            @foreach (var item in ViewBag.model)
-            {
                 <tbody>
                     <tr>
-                        <td>@item.OrderId</td>
+                        <td>@ViewBag.model.OrderId</td>
+                        <td>@ViewBag.model.Item.ItemId</td>
+                        <td>@ViewBag.model.Item.ItemName</td>
+                        <td>@ViewBag.model.Quantity</td>
+                        <td>@ViewBag.model.Discount</td>
+                        <td>@ViewBag.model.PricePaid</td>
                     </tr>
                 </tbody>
-            }
         </table>
     </div>
 </div>
