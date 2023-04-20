@@ -19,6 +19,7 @@
                     <th scope="col">Company Name</th>
                     <th scope="col">Item Category Name</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             @foreach (var item in ViewBag.model)
@@ -29,6 +30,9 @@
                         <td>@item.Company.CompanyName</td>
                         <td>@item.ItemCategory.ItemCategoryName</td>
                         <td>@item.SellPrice</td>
+                        <td>
+                            @Html.ActionLink("View", "ViewItem", new { itemid = @item.ItemId })
+                        </td>
                     </tr>
                 </tbody>
             }

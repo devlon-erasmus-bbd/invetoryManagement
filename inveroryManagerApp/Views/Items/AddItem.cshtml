@@ -1,4 +1,4 @@
-﻿@model inveroryManagerApp.Models.ItemModel
+﻿ @model inveroryManagerApp.Models.ItemModel
 @{
     ViewData["Title"] = "Add an Item";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +24,7 @@
             <div class="col-sm-10">
                 @Html.DropDownList("listCompany", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.listCompany, "", new { @class = "text-danger" })
-                <a asp-action="AddCompany" asp-controller="home">
+                <a asp-action="AddCompany" asp-controller="Items">
                     Add Company
                 </a>
             </div>
@@ -35,7 +35,7 @@
             <div class="col-sm-10">
                 @Html.DropDownList("listSupplier", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.listSupplier, "", new { @class = "text-danger" })
-                <a asp-action="AddSupplier" asp-controller="home">
+                <a asp-action="AddSupplier" asp-controller="Items">
                     Add Supplier
                 </a>
             </div>
@@ -46,7 +46,7 @@
             <div class="col-sm-10">
                 @Html.DropDownList("listItemCategory", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.listItemCategory, "", new { @class = "text-danger" })
-                <a asp-action="AddItemCategory" asp-controller="home">
+                <a asp-action="AddItemCategory" asp-controller="Items">
                     Add Item Category
                 </a>
             </div>

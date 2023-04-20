@@ -57,15 +57,24 @@ CREATE TABLE [Customer] (
 )
 GO
 
-CREATE TABLE [OrderTransaction] (
+CREATE TABLE [Transaction] (
   [transaction_id] INT PRIMARY KEY IDENTITY(1, 1),
-  [fk_staff_id] INT,
   [fk_customer_id] INT,
-  [order_date] DATE
+  [fk_staff_id] INT,
+  [transaction_total] DECIMAL(12, 2),
+  [transaction_date] DATE
 )
 GO
 
-CREATE TABLE [Orders] (
+CREATE TABLE [TransactionDetails] (
+  [transaction_details_id] INT PRIMARY KEY IDENTITY(1, 1),
+  [fk_item_id] INT,
+  [fk_transaction_id] INT,
+  [quantity] INT
+)
+GO
+
+CREATE TABLE [Order] (
   [order_id] INT PRIMARY KEY IDENTITY(1, 1),
   [fk_item_id] INT,
   [quantity] INT,
@@ -83,12 +92,17 @@ GO
 ALTER TABLE [Item] ADD FOREIGN KEY ([fk_item_category_id]) REFERENCES [ItemCategory] ([item_category_id])
 GO
 
-ALTER TABLE [Bill] ADD FOREIGN KEY ([fk_staff_id]) REFERENCES [Staff] ([staff_id])
+ALTER TABLE [Transaction] ADD FOREIGN KEY ([fk_staff_id]) REFERENCES [Staff] ([staff_id])
 GO
 
-ALTER TABLE [Bill] ADD FOREIGN KEY ([fk_customer_id]) REFERENCES [Customer] ([customer_id])
+ALTER TABLE [Transaction] ADD FOREIGN KEY ([fk_customer_id]) REFERENCES [Customer] ([customer_id])
 GO
 
-ALTER TABLE [Orders] ADD FOREIGN KEY ([fk_item_id]) REFERENCES [Item] ([item_id])
+ALTER TABLE [TransactionDetails] ADD FOREIGN KEY ([fk_item_id]) REFERENCES [Item] ([item_id])
 GO
 
+ALTER TABLE [TransactionDetails] ADD FOREIGN KEY ([fk_transaction_id]) REFERENCES [Transaction] ([transaction_id])
+GO
+
+ALTER TABLE [Order] ADD FOREIGN KEY ([fk_item_id]) REFERENCES [Item] ([item_id])
+GO

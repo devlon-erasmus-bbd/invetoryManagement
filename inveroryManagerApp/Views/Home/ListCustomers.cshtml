@@ -13,6 +13,7 @@
                     <th scope="col">Customer Id</th>
                     <th scope="col">Customer Name</th>
                     <th scope="col">Customer Contact Numebr</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             @foreach (var item in ViewBag.model)
@@ -22,6 +23,10 @@
                         <td>@item.CustomerId</td>
                         <td>@item.CustomerName</td>
                         <td>@item.CustomerContactNumber</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditCustomer", new {customerid=@item.CustomerId })
+
+                        </td>
                     </tr>
                 </tbody>
             }
