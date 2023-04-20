@@ -57,18 +57,17 @@ CREATE TABLE [Customer] (
 )
 GO
 
-CREATE TABLE [Bill] (
-  [bill_id] INT PRIMARY KEY IDENTITY(1, 1),
+CREATE TABLE [OrderTransaction] (
+  [transaction_id] INT PRIMARY KEY IDENTITY(1, 1),
   [fk_staff_id] INT,
   [fk_customer_id] INT,
   [order_date] DATE
 )
 GO
 
-CREATE TABLE [Order] (
+CREATE TABLE [Orders] (
   [order_id] INT PRIMARY KEY IDENTITY(1, 1),
   [fk_item_id] INT,
-  [fk_bill_id] INT,
   [quantity] INT,
   [discount] DECIMAL(12, 2),
   [price_paid] DECIMAL(12, 2)
@@ -93,5 +92,3 @@ GO
 ALTER TABLE [Order] ADD FOREIGN KEY ([fk_item_id]) REFERENCES [Item] ([item_id])
 GO
 
-ALTER TABLE [Order] ADD FOREIGN KEY ([fk_bill_id]) REFERENCES [Bill] ([bill_id])
-GO
