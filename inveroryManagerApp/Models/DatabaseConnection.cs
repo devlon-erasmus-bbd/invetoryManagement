@@ -184,9 +184,6 @@ public class DatabaseConnection
         String sql = "INSERT INTO [invetory_manager].[dbo].[Company] (company_name, company_description, created_date)" +
             "VALUES ('" + company.CompanyName + "', '" + company.CompanyDescription + "', GETDATE()); SELECT SCOPE_IDENTITY()";
         SqlCommand command = new SqlCommand(sql, conn);
-        //command.Parameters.AddWithValue("@DATE", DateTime.Now);
-        //SqlDataReader dataReader = command.ExecuteReader();
-        //int number = command.ExecuteNonQuery();
         int insertedID = Convert.ToInt32(command.ExecuteScalar());
 
         CloseConnectionToDatabase(conn);
@@ -194,11 +191,25 @@ public class DatabaseConnection
 
     public void AddSupplier(SupplierModel supplier)
     {
+        SqlConnection conn = ConnectToDatabase();
 
+        String sql = "INSERT INTO [invetory_manager].[dbo].[Supplier] (supplier_name, supplier_contact_number, created_date)" +
+            "VALUES ('" + supplier.SupplierName + "', '" + supplier.SupplierContactNumber + "', GETDATE()); SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+
+        CloseConnectionToDatabase(conn);
     }
 
-    public void AddItemCategory(ItemCategoryModel itemCategoryModel)
+    public void AddItemCategory(ItemCategoryModel itemCategory)
     {
+        SqlConnection conn = ConnectToDatabase();
 
+        String sql = "INSERT INTO [invetory_manager].[dbo].[ItemCategory] (item_category_name, item_category_description)" +
+            "VALUES ('" + itemCategory.ItemCategoryName + "', '" + itemCategory.ItemCategoryDescription + "'); SELECT SCOPE_IDENTITY()";
+        SqlCommand command = new SqlCommand(sql, conn);
+        int insertedID = Convert.ToInt32(command.ExecuteScalar());
+
+        CloseConnectionToDatabase(conn);
     }
 }

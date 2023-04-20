@@ -48,9 +48,7 @@ public class HomeController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddCompany(company);
-        //return View();
-        //return RedirectToAction("AddCompany", "./AddItem");
-        return View("AddItem");
+        return Redirect("AddItem");
     }
 
     [HttpGet]
