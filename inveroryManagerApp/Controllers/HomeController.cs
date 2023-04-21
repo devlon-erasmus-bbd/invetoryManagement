@@ -114,7 +114,22 @@ public partial class HomeController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddTransaction(buyItem);
-        return Redirect("ListCustomers");
+        return Redirect("ListTransactions");
+    }
+
+    public IActionResult ListTransactions()
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetTransactions();
+        return View();
+    }
+
+    public IActionResult ViewTransactions(int transactionid)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        ViewBag.model = db.GetTransactionDetailsByTransactionId(transactionid);
+        ViewBag.transaction = db.GetTransactionByTransactionId(transactionid);
+        return View();
     }
 
     public IActionResult Staffs()
