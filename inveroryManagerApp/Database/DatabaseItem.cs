@@ -151,13 +151,15 @@ public partial class DatabaseConnection
 
         SqlConnection conn = ConnectToDatabase();
 
-        var exp = (item.ExpiryDate?.ToString("'yyyy-MM-dd'") ?? "NULL");
+        var expDate = "NULL";
+        if (item.ExpiryDate != null)
+            expDate = "'" + item.ExpiryDate?.ToString("yyyy-MM-dd") + "'";
 
         String sql = "INSERT INTO [invetory_manager].[dbo].[Item] " +
             "(fk_company_id, fk_supplier_id, fk_item_category_id, item_name, item_description, " +
             "acquired_date, cost_price, sell_price, quantity, expiry_date) " +
             "VALUES (" + item.listCompany + ", " + item.listSupplier + ", " + item.listItemCategory + ", '" + item.ItemName + "', '" + item.ItemDescription + "', " +
-            "'" + item.AcquiredDate.ToString("yyyy-MM-dd") + "', " + item.CostPrice + ", " + item.SellPrice + ", " + item.Quantity + ", " + (item.ExpiryDate?.ToString("'yyyy-MM-dd'") ?? "NULL") + "); " +
+            "'" + item.AcquiredDate.ToString("yyyy-MM-dd") + "', " + item.CostPrice + ", " + item.SellPrice + ", " + item.Quantity + ", " + expDate + "); " +
             "SELECT SCOPE_IDENTITY()";
         SqlCommand command = new SqlCommand(sql, conn);
         int insertedID = Convert.ToInt32(command.ExecuteScalar());
