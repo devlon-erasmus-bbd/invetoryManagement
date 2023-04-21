@@ -2,11 +2,20 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using inveroryManagerApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using inveroryManagerApp.Event;
 
 namespace inveroryManagerApp.Controllers;
 
 public partial class OrdersController : Controller
 {
+    private readonly OrderProcessor _orderProcessor;
+    public OrdersController()
+  {
+        _orderProcessor = new OrderProcessor();
+        var emailService = new EmailService();
+        _orderProcessor.OrderProcessed += emailService.OnOrderProcessed;
+    }
+
     public IActionResult ListOrders()
     {
         DatabaseConnection db = new DatabaseConnection();
@@ -35,6 +44,7 @@ public partial class OrdersController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         db.AddOrder(order);
+        _orderProcessor.ProcessOrder(order);
         return Redirect("ListOrders");
     }
 

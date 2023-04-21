@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using inveroryManagerApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace inveroryManagerApp.Controllers;
 
@@ -12,8 +13,55 @@ public partial class ItemsController : Controller
     {
         DatabaseConnection db = new DatabaseConnection();
         List<ItemModel> listOfItems = db.GetListOfItems();
+        ViewBag.Categories = db.GetItemCategoryModels(); 
         ViewBag.model = listOfItems;
         return View();
+    }
+
+    public delegate List<ItemModel> FilterDelegate(List<ItemModel> im);
+
+    [HttpPost]
+    public IActionResult ListItems(string filters)
+    {
+        DatabaseConnection db = new DatabaseConnection();
+        FilterClass filterClass = new FilterClass();
+        List<ItemModel> listOfItems = db.GetListOfItems();
+        ViewBag.Categories = db.GetItemCategoryModels();
+
+        if(filters == "Price: High to Low")
+        {
+            ViewBag.model = filterClass.PerformFilter(listOfItems, filterClass.PriceHighLow);
+        }
+        else if (filters == "Price: Low to High")
+        {
+            ViewBag.model = filterClass.PerformFilter(listOfItems, filterClass.PriceLowHigh);
+        }
+        else
+        {
+            ViewBag.model = listOfItems;
+        }
+
+        return View();
+    }
+
+    public class FilterClass
+    {
+        public FilterClass() { }
+
+        public List<ItemModel> PerformFilter(List<ItemModel> items, FilterDelegate filter)
+        {
+            return filter.Invoke(items);
+        }
+
+        public List<ItemModel> PriceHighLow(List<ItemModel> list)
+        {
+            return list.OrderByDescending(x => x.SellPrice).ToList();
+        }
+
+        public List<ItemModel> PriceLowHigh(List<ItemModel> list)
+        {
+            return list.OrderBy(x => x.SellPrice).ToList();
+        }
     }
 
     [HttpGet]
