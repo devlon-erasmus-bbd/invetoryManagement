@@ -25,9 +25,9 @@ namespace inveroryManagerApp.Models
 
         [Display(Name = "Items")]
         //public int listItem { get; set; }
-        public List<SelectListItem> listItem { get; set; }
+        public List<SelectListItem>? listItem { get; set; }
 
-        public List<string> SelectedItems { get; set; }
+        public List<string>? SelectedItems { get; set; }
 
 
     }
