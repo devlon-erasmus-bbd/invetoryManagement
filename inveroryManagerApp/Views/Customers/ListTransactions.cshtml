@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "List Transactions";
+}
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<div class="wrapper">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Transaction Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Staff Name</th>
+                    <th scope="col">Transaction Total</th>
+                    <th scope="col">Transaction Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            @foreach (var item in ViewBag.model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@item.TransactionId</td>
+                        <td>@item.Customer.CustomerName</td>
+                        <td>@item.Staff.StaffName</td>
+                        <td>@item.TransactionTotal</td>
+                        <td>@item.TransactionDate?.ToLongDateString()</td>
+                        <td>
+                            @Html.ActionLink("View", "ViewTransactions", new { transactionid = @item.TransactionId })
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+

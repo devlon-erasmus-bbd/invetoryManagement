@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "View a Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 style="font-size: 4vw;">@ViewData["Title"]</h1>
+</div>
+
+<h2>Transaction #@ViewBag.transaction.TransactionId</h2>
+<h6>for <b>@ViewBag.transaction.Customer.CustomerName</b> made by <b>@ViewBag.transaction.Staff.StaffName</b> on <b>@ViewBag.transaction.TransactionDate?.ToLongDateString()</b></h6>
+<br/>
+
+<h5>Items brought: </h5>
+@foreach (TransactionDetailsModel item in ViewBag.model)
+{
+    <p>@item.Item?.Company?.CompanyName: @item.Item?.ItemName x @item.Quantity (@item.Item?.SellPrice)</p>
+}
+
+<h6>Total Amount: @ViewBag.transaction.TransactionTotal</h6>
